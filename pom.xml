@@ -11,9 +11,73 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.version>3.5.1</maven.compiler.version>
-        <maven.jar.version>3.0.2</maven.jar.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.build.sourceEncoding>UTF8</project.build.sourceEncoding>
+        <java.version>1.7</java.version>
+        <maven-compiler-plugin.version>3.3</maven-compiler-plugin.version>
     </properties>
+
+    <profiles>
+        <profile>
+            <id>TEST</id>
+            <properties>
+                <env>test</env>
+                <profileActive>test</profileActive>
+            </properties>
+
+            <!-- 指定环境差异配置的配置文件所在目录 -->
+            <build>
+                <resources>
+                    <!-- 指定环境差异配置的配置文件所在目录 -->
+                    <resource>
+                        <directory>${project.basedir}/src/main/resources/TEST</directory>
+                    </resource>
+                </resources>
+            </build>
+        </profile>
+        <profile>
+            <id>DEVELOP</id>
+            <properties>
+                <env>dev</env>
+                <profileActive>dev</profileActive>
+            </properties>
+            <!-- 指定环境差异配置的配置文件所在目录 -->
+            <build>
+                <resources>
+                    <!-- 指定环境差异配置的配置文件所在目录 -->
+                    <resource>
+                        <directory>${project.basedir}/src/main/resources/DEVELOP</directory>
+                    </resource>
+                </resources>
+            </build>
+        </profile>
+        <profile>
+            <id>PRODUCT</id>
+            <properties>
+                <env>prod</env>
+                <profileActive>prod</profileActive>
+            </properties>
+            <!-- 指定环境差异配置的配置文件所在目录 -->
+            <build>
+                <resources>
+                    <!-- 指定环境差异配置的配置文件所在目录 -->
+                    <resource>
+                        <directory>${project.basedir}/src/main/resources/PRODUCT</directory>
+                    </resource>
+                </resources>
+            </build>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+
+        </profile>
+        <profile>
+            <id>UAT</id>
+            <properties>
+                <env>uat</env>
+            </properties>
+        </profile>
+    </profiles>
 
     <build>
         <finalName>safekill</finalName>
@@ -36,6 +100,30 @@
 
                     </archive>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                    <testSource>${java.version}</testSource>
+                    <testTarget>${java.version}</testTarget>
+                </configuration>
+                <version>${maven-compiler-plugin.version}</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>2.2.1</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
