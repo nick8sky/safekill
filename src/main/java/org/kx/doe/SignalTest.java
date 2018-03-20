@@ -6,6 +6,10 @@ package org.kx.doe;
 import sun.misc.Signal;
 import sun.misc.SignalHandler;
 
+import java.sql.Array;
+import java.util.ArrayList;
+import java.util.Arrays;
+
 @SuppressWarnings("restriction")
 public class SignalTest {
     public static void main(String[] args) throws InterruptedException {
@@ -38,4 +42,23 @@ class MySignalHandler implements SignalHandler {
         }
     }
 
+
+
+    public  void Test1(){
+        String[] aa = {"a","b","c"};
+        ArrayList list = (ArrayList) Arrays.asList(aa);
+        ArrayList list1 = new ArrayList(3);
+        for(int x =list.size() -1;  x>=0;x--){
+            list1.add(list.get(x));
+            System.out.println(list.get(x));
+        }
+
+
+
+    }
+
 }
+
+
+
+
