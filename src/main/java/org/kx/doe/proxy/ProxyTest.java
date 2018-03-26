@@ -1,5 +1,6 @@
 package org.kx.doe.proxy;
 
+import net.sf.cglib.proxy.Enhancer;
 import org.junit.Test;
 
 /**
@@ -28,6 +29,17 @@ public class ProxyTest {
         ProxyGeneratorUtils.writeProxyClassToHardDisk("/Users/sunkaixiang/IdeaProjects/safekill/target/$Proxy11.class");
 
     }
+
+
+
+    @Test
+    public void testMakeCglibProxy() throws Throwable {
+        UserServiceImpl userService = (UserServiceImpl) new UserServiceFactory().getUserServiceFactory().getUserService();
+        userService.add();
+        userService.delete();
+    }
+
+
 
 
 }
