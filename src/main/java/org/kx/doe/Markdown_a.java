@@ -71,6 +71,24 @@ public class Markdown_a {
                     code = false;
                 }
 
+
+                if(s1.contains("src/imgs")  ){
+                    int starte = s1.indexOf("img src=") ;
+                    int ends = s1.indexOf("/>");  //src={require('../../img/20161013182456810.png')}
+                    int end2 = ends ;
+
+                    if(s1.contains("alt")){
+                        end2 = s1.indexOf("alt");
+                    }
+
+                    String to = s1.substring(s1.indexOf("src/imgs")+8,end2);
+                    //String TARGET = "{require('../../../imgs"+to+")}" ;
+                    String TARGET = "{require('../../imgs"+to+")}" ;
+                    s1 = s1.substring(0,starte+8)+TARGET+s1.substring(ends);
+
+                }
+
+
                 if(code){
                   //  s1.replace(" ","&nbsp;")；
                     c=  s1.replace(" ","&nbsp;") +"<br/>" ;
